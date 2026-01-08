@@ -1,0 +1,24 @@
+services:
+  # Služba pro databázi
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Heslo bude 'root'
+      MYSQL_DATABASE: SkladDB
+    ports:
+      - "3306:3306"
+    volumes:
+      # Tady říkáme: vezmi můj SQL skript a hoď ho do složky, 
+      # kterou MySQL zkontroluje při startu a spustí ho!
+      - ./database_setup.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # Služba pro tvou aplikaci
+  app:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - .:/app  # Aby se změny v kódu projevily hned
+    stdin_open: true # Důležité pro input()
+    tty: true        # Důležité pro interaktivní konzoli
