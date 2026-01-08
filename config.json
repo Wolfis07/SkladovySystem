@@ -1,0 +1,9 @@
+{
+    "database": {
+        "host": "46.13.167.200",
+        "port": 20500,
+        "user": "Matej",
+        "password": "Hodek1234!",
+        "database": "pv_databaze_matej"
+    }
+}
