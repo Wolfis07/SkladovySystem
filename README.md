@@ -1,12 +1,30 @@
-# Skladový Systém
+Implementace skladového systému s využitím relační databáze a **Repository Pattern (D1)**.
 
-Tento projekt splňuje zadání **D1 (Repository Pattern)**.
+## Popis projektu
+Aplikace slouží pro správu skladu, objednávek a generování reportů. Řešení je plně kontejnerizované.
 
-## Jak spustit aplikaci
-Aplikace je kontejnerizovaná pomocí Dockeru. Pro spuštění stačí v kořenovém adresáři spustit příkaz:
+**Funkcionalita:**
+* **CRUD:** Produkty, Kategorie, Zákazníci
+* **Transakce:** Vytváření objednávek (Atomické operace)
+* **Reporting:** Agregované přehledy tržeb
+* **Import:** CSV parser pro naskladnění
 
-docker-compose run --rm app
+## Spuštění (Docker)
+Není nutná lokální instalace Pythonu ani SQL Serveru.
 
-## Popis
-Aplikace využívá MSSQL databázi a Python skripty pro správu skladu.
-Dokumentace a testovací scénáře jsou ve složce /doc.
+1.  **Spuštění aplikace:**
+    ```bash
+    docker-compose run --rm app
+    ```
+    *(Příkaz automaticky sestaví image, spustí DB kontejner a připojí aplikaci)*
+
+## Konfigurace
+Soubor: `config.json`
+* **Default:** Připojení k Docker kontejneru (`mssql`).
+* **Externí DB:** Změňte hodnoty `server`, `username`, `password`.
+
+## Struktura
+* `/src` – Zdrojové kódy (Repositories, Models, Services)
+* `/doc` – Dokumentace a testovací scénáře (PDF)
+* `data.csv` – Data pro import
+* `docker-compose.yml` – Orchestrace kontejnerů
